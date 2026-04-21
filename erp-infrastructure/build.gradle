@@ -1,0 +1,4 @@
+// Módulo de infraestructura: persistencia, clientes externos y adaptadores
+dependencies {
+    implementation project(':erp-domain')
+}

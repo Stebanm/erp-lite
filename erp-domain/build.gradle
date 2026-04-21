@@ -1,0 +1,4 @@
+// Módulo de dominio: entidades, value objects y reglas de negocio
+dependencies {
+    implementation project(':erp-common')
+}

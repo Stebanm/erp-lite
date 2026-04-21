@@ -1,0 +1,4 @@
+// Módulo de aplicación: casos de uso y servicios de aplicación
+dependencies {
+    implementation project(':erp-domain')
+}
