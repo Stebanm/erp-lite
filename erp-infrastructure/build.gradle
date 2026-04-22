@@ -1,4 +1,15 @@
 // Módulo de infraestructura: persistencia, clientes externos y adaptadores
 dependencies {
     implementation project(':erp-domain')
+
+    // SQL
+    implementation("org.postgresql:postgresql:42.7.10")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+    // Mongo
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+
+    // Redis / Cache
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    implementation("org.springframework.boot:spring-boot-starter-cache")
 }
