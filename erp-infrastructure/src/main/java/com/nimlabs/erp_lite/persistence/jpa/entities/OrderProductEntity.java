@@ -1,4 +1,4 @@
-package com.nimlabs.erp_lite.entities;
+package com.nimlabs.erp_lite.persistence.jpa.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
