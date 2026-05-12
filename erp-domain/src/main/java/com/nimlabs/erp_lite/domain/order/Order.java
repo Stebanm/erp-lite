@@ -19,10 +19,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order extends AggregateRoot<OrderId> {
 
-    private OrderId id;
     private OrderNumber orderNumber;
     private Customer customer;
     private OrderStatus status;
@@ -30,20 +28,35 @@ public class Order extends AggregateRoot<OrderId> {
     private Money totalAmount;
     private AuditInfo auditInfo;
 
-    Order(OrderId id, OrderNumber orderNumber, Customer customer,
-          OrderStatus status, List<OrderItem> items, Money totalAmount,
-          AuditInfo auditInfo) {
-        this.id = id;
+    protected Order() {
+        super(null);
+    }
+
+    private Order(
+            OrderId id,
+            OrderNumber orderNumber,
+            Customer customer,
+            OrderStatus status,
+            List<OrderItem> items,
+            Money totalAmount,
+            AuditInfo auditInfo
+    ) {
+        super(id);
+
         this.orderNumber = orderNumber;
         this.customer = customer;
         this.status = status;
-        this.items = items;
+        this.items = new ArrayList<>(items);
         this.totalAmount = totalAmount;
         this.auditInfo = auditInfo;
     }
 
-    public static Order create(OrderNumber orderNumber, Customer customer,
-                               List<OrderItem> items, String createdBy) {
+    public static Order create(
+            OrderNumber orderNumber,
+            Customer customer,
+            List<OrderItem> items,
+            String createdBy
+    ) {
         Objects.requireNonNull(orderNumber, "OrderNumber cannot be null");
         Objects.requireNonNull(customer, "Customer cannot be null");
         Objects.requireNonNull(createdBy, "CreatedBy cannot be null");
