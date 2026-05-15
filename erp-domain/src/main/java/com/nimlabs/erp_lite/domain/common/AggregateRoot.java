@@ -39,4 +39,12 @@ public abstract class AggregateRoot<ID> extends Entity<ID> {
     public List<DomainEvent> getDomainEvents() {
         return Collections.unmodifiableList(domainEvents);
     }
+
+    /**
+     * Limpia la lista de eventos de dominio registrados.
+     * Este método debe ser llamado por la capa de infraestructura después de publicar los eventos.
+     */
+    public void clearDomainEvents() {
+        this.domainEvents.clear();
+    }
 }

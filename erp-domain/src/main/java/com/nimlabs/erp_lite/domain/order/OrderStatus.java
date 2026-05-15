@@ -25,6 +25,8 @@ public record OrderStatus(String value) {
             CANCELLED
     );
 
+    private static final Set<String> FINAL_STATES = Set.of(DELIVERED, CANCELLED);
+
     public OrderStatus {
         if (value == null || !VALID_STATUSES.contains(value)) {
             throw new IllegalArgumentException(
@@ -104,5 +106,9 @@ public record OrderStatus(String value) {
 
     public boolean isCancelled() {
         return CANCELLED.equals(this.value);
+    }
+
+    public boolean isFinalState() {
+        return FINAL_STATES.contains(this.value);
     }
 }
