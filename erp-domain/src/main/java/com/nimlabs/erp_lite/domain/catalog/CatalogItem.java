@@ -41,8 +41,12 @@ public class CatalogItem extends Entity<String> {
         this.isActive = true;
     }
 
-    public void changeStatus(boolean status) {
-        this.isActive = status;
+    public void turnOffStatus() {
+        this.isActive = false;
+    }
+
+    public void turnOnStatus() {
+        this.isActive = true;
     }
 
     public Object getMetadata(String key) {
