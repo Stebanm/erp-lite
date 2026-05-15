@@ -5,11 +5,14 @@ package com.nimlabs.erp_lite.domain.product;
  *
  * @param value el valor del stock (debe ser >= 0)
  */
-public record Stock(int value) {
+public record Stock(Integer value) {
 
     public Stock {
+        if (value == null) {
+            throw new IllegalArgumentException("Stock cannot be null");
+        }
         if (value < 0) {
-            throw new IllegalArgumentException("Stock cannot be negative, got: " + value);
+            throw new IllegalArgumentException("Stock cannot be negative");
         }
     }
 
@@ -39,8 +42,8 @@ public record Stock(int value) {
      * @return una nueva instancia de Stock con el valor incrementado
      */
     public Stock increment(int quantity) {
-        if (quantity <= 0) {
-            throw new IllegalArgumentException("Increment quantity must be positive, got: " + quantity);
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Increment quantity cannot be negative");
         }
 
         return new Stock(this.value + quantity);
@@ -54,13 +57,13 @@ public record Stock(int value) {
      * @throws IllegalArgumentException si el resultado fuera negativo
      */
     public Stock decrement(int quantity) {
-        if (quantity <= 0) {
-            throw new IllegalArgumentException("Decrement quantity must be positive, got: " + quantity);
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Decrement quantity cannot be negative");
         }
 
         if (this.value - quantity < 0) {
             throw new IllegalArgumentException(
-                    "Insufficient stock: available=" + this.value + ", requested=" + quantity);
+                    "Cannot decrement stock below zero. Current: " + this.value + ", requested: " + quantity);
         }
 
         return new Stock(this.value - quantity);
